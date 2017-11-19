@@ -23,6 +23,7 @@
     <string-array name="horarios" >
         <item>Horário</item>
         <item>19:00 as 20:40</item>
+        <item>19:00 as 22:40</item>
         <item>21:00 as 22:40</item>
     </string-array>
 </resources>
