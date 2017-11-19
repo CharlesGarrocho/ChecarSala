@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Checar Sala</string>
+
+    <string-array name="salas">
+        <item>Sala</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="horarios" >
+        <item>Horário</item>
+        <item>19:00 as 20:40</item>
+        <item>21:00 as 22:40</item>
+    </string-array>
 </resources>

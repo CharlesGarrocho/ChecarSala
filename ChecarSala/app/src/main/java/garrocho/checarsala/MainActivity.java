@@ -1,5 +1,7 @@
 package garrocho.checarsala;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         for (int i=1; i<=15; i++) {
             int id = getResources().getIdentifier("button"+i, "id", getPackageName());
             ((Button)findViewById(id)).setBackgroundResource(android.R.drawable.btn_default);
@@ -55,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
             ((Button)findViewById(R.id.botao_notificar)).setEnabled(true);
         else
             ((Button)findViewById(R.id.botao_notificar)).setEnabled(false);
+    }
+
+    public void configurar (View comp) {
+        Intent intent = new Intent(this, ConfigurarActivity.class);
+        startActivity(intent);
     }
 }

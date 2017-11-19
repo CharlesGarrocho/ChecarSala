@@ -178,6 +178,7 @@
         android:layout_height="wrap_content"
         android:text="Configurar"
         android:id="@+id/botao_configurar"
+        android:onClick="configurar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
