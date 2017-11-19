@@ -29,7 +29,7 @@ public class AdaptadorAtividades extends ArrayAdapter<String> {
 
         String[] atividade = atividades.get(position).split("56765");
         rotuloSalaAtiv.setText("Sala " + atividade[0] + ": " + atividade[1]);
-        rotuloHorario.setText("Horário: " + atividade[2]);
+        rotuloHorario.setText("Horário: " + atividade[2] + " - " + atividade[3]);
 
         return itemLista;
 

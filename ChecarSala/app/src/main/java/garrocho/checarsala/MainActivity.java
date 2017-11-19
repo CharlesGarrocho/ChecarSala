@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,12 +21,15 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
     int botoes[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     AtividadeDAO dao;
+    HashMap<String, String> coordenadores = new HashMap<String, String>();
+    ArrayList<Atividade> atividades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("[IFSP-CJO] Checar Sala");
         dao = new AtividadeDAO(getBaseContext());
+
+        coordenadores.put("matematica", "Maycon Godoi9898ctgarrocho@gmail.com");
+        coordenadores.put("pedagogia", "Walas Oliveira9898ctgarrocho@gmail.com");
+        coordenadores.put("tads", "Paulo Zeferino9898ctgarrocho@gmail.com");
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         for (int i = 1; i <= 15; i++) {
@@ -42,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void construirBotoes() {
-        ArrayList<Atividade> atividades = dao.listar();
+        atividades = dao.listar();
         SimpleDateFormat sdf = new SimpleDateFormat("hh");
         String hora = sdf.format(new Date());
         hora = "19";
@@ -58,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setTitle("[IFSP-CJO] Checar Sala");
         construirBotoes();
     }
 
@@ -97,16 +109,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notificar(View comp) {
+        ArrayList<String> notificados = new ArrayList<String>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Email sender = new Email("email", "senha");
-        try {
-            sender.sendMail("[CAE] Sala Sem Atividade",
-                    "Prezado Professor, a sala 1 está sem atividades",
-                    "ctgarrocho@gmail.com", "CAE",
-                    "ctgarrocho@gmail.com");
-        }catch (Exception error) {
-            error.printStackTrace();
+        final Email sender = new Email("email", "senha");
+        for (int i=0; i<15; i++) {
+            if (botoes[i] == 2) {
+                for (Atividade at : atividades) {
+                    if (at.getSala()-1 == i) {
+                        final String[] inf = coordenadores.get(at.getCurso().toLowerCase()).split("9898");
+
+                        final int sala = i+1;
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override public Void doInBackground(Void... arg) {
+                                boolean resposta = false;
+
+                                try {
+                                    resposta = sender.sendMail("[CAE] Sala Sem Atividade",
+                                            "Prezado Coordenador " + inf[0]+", a sala " + sala + " está sem atividades neste momento. Não Responda a este email.",
+                                            "ctgarrocho@gmail.com", "[IFSP-CJO] CAE",
+                                            "ctgarrocho@gmail.com");
+                                }catch (Exception error) {
+                                    resposta = false;
+                                }
+                                if (resposta) {
+                                    runOnUiThread(new Runnable(){
+
+                                        @Override
+                                        public void run(){
+                                            Toast.makeText(MainActivity.this, "Sala " + sala + ": " + inf[0] + " notificado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                return null;}
+                        }.execute();
+                    }
+                }
+            }
         }
     }
 

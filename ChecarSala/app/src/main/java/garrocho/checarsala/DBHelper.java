@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "atividades.db";
     private static final int DATABASE_VERSION = 1;
-    private final String CREATE_TABLE = "CREATE TABLE Atividade (sala INTEGER, descricao VARCHAR, horario VARCHAR);";
+    private final String CREATE_TABLE = "CREATE TABLE Atividade (sala INTEGER, dia VARCHAR, curso VARCHAR, horario VARCHAR);";
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

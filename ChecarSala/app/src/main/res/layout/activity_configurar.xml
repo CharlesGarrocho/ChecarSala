@@ -14,44 +14,65 @@
         android:layout_height="wrap_content"
         android:text="Adicionar"
         android:id="@+id/botao_vincular"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:textSize="7pt"
-        android:onClick="adicionar" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lista_atividades_view"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/spinner_horario" />
+        android:onClick="adicionar"
+        android:layout_below="@+id/spinner_horario"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_horario"
-        android:layout_above="@+id/botao_vincular"
+        android:layout_alignTop="@+id/spinner_dia"
         android:layout_toLeftOf="@+id/botao_vincular"
-        android:layout_toStartOf="@+id/botao_vincular" />
+        android:layout_toRightOf="@+id/textView" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_sala"
-        android:layout_above="@+id/botao_vincular"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/botao_vincular"
-        android:layout_alignStart="@+id/botao_vincular" />
+        android:layout_alignStart="@+id/botao_vincular"
+        android:layout_above="@+id/botao_vincular" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/campo_texto_descricao"
-        android:layout_alignBottom="@+id/botao_vincular"
+        android:id="@+id/spinner_cursos"
+        android:layout_toStartOf="@+id/botao_vincular"
+        android:layout_above="@+id/lista_atividades_view"
+        android:layout_below="@+id/spinner_horario"
+        android:layout_toLeftOf="@+id/botao_vincular" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_dia"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/botao_vincular"
-        android:layout_toStartOf="@+id/botao_vincular" />
+        android:layout_toStartOf="@+id/spinner_horario"
+        android:layout_toLeftOf="@+id/spinner_horario" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:paddingLeft="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lista_atividades_view"
+        android:layout_below="@+id/botao_vincular"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

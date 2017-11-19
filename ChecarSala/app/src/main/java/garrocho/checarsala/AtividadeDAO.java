@@ -17,11 +17,12 @@ public class AtividadeDAO {
         gw = DBGateway.getInstance(ctx);
     }
 
-    public boolean adicionar(int sala, String descricao, String horario){
+    public boolean adicionar(int sala, String horario, String curso, String dia){
         ContentValues cv = new ContentValues();
         cv.put("sala", sala);
-        cv.put("descricao", descricao);
         cv.put("horario", horario);
+        cv.put("curso", curso);
+        cv.put("dia", dia);
         return gw.getDatabase().insert(TABLE_ATIVIDADES, null, cv) > 0;
     }
 
@@ -30,9 +31,10 @@ public class AtividadeDAO {
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();
         while(cursor.moveToNext()){
             int sala = cursor.getInt(cursor.getColumnIndex("sala"));
-            String descricao = cursor.getString(cursor.getColumnIndex("descricao"));
             String horario = cursor.getString(cursor.getColumnIndex("horario"));
-            atividades.add(new Atividade(sala,descricao, horario));
+            String curso = cursor.getString(cursor.getColumnIndex("curso"));
+            String dia = cursor.getString(cursor.getColumnIndex("dia"));
+            atividades.add(new Atividade(sala, horario, curso, dia));
         }
         return atividades;
 

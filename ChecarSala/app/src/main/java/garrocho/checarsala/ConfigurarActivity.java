@@ -24,13 +24,14 @@ public class ConfigurarActivity extends AppCompatActivity {
     AtividadeDAO dao;
     ListView listaAtividades;
     ArrayList<Atividade> atividades = new ArrayList<Atividade>();
-    Spinner spSalas, spHor;
+    Spinner spSalas, spHor, spDia, spCurso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configurar);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setTitle("[IFSP-CJO] Configurar Salas");
         spSalas = (Spinner) findViewById(R.id.spinner_sala);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.salas, android.R.layout.simple_spinner_item);
@@ -43,6 +44,18 @@ public class ConfigurarActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spHor.setAdapter(adapter2);
 
+        spDia = (Spinner) findViewById(R.id.spinner_dia);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+                R.array.dias, android.R.layout.simple_spinner_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spDia.setAdapter(adapter3);
+
+        spCurso = (Spinner) findViewById(R.id.spinner_cursos);
+        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
+                R.array.cursos, android.R.layout.simple_spinner_item);
+        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCurso.setAdapter(adapter4);
+
         dao = new AtividadeDAO(getBaseContext());
         atualizarLista();
     }
@@ -52,7 +65,7 @@ public class ConfigurarActivity extends AppCompatActivity {
         ArrayList<String> ats = new ArrayList<String>();
 
         for (Atividade at : atividades)
-            ats.add(at.getSala() + "56765" + at.getDescricao() + "56765" + at.getHorario());
+            ats.add(at.getSala() + "56765" + at.getCurso() + "56765" + at.getHorario() + "56765" + at.getDia());
 
         listaAtividades = (ListView)findViewById(R.id.lista_atividades_view);
         AdaptadorAtividades adaptador = new AdaptadorAtividades(this, ats);
@@ -62,12 +75,14 @@ public class ConfigurarActivity extends AppCompatActivity {
     public void adicionar(View comp) {
         String sala = spSalas.getSelectedItem().toString();
         String hora = spHor.getSelectedItem().toString();
-        String descricao = ((EditText)findViewById(R.id.campo_texto_descricao)).getText().toString();
-        ((EditText)findViewById(R.id.campo_texto_descricao)).setText("");
+        String curso = spCurso.getSelectedItem().toString();
+        String dia = spDia.getSelectedItem().toString();
 
         spSalas.setSelection(0);
         spHor.setSelection(0);
-        dao.adicionar(Integer.valueOf(sala), descricao, hora);
+        spCurso.setSelection(0);
+        spDia.setSelection(0);
+        dao.adicionar(Integer.valueOf(sala), hora, curso, dia);
         atualizarLista();
     }
 }
