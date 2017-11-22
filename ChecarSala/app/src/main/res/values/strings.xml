@@ -20,25 +20,25 @@
         <item>15</item>
     </string-array>
 
-    <string-array name="horarios" >
+    <string-array name="horarios">
         <item>Horário</item>
         <item>19:00 as 20:40</item>
         <item>19:00 as 22:40</item>
         <item>21:00 as 22:40</item>
     </string-array>
 
-    <string-array name="cursos" >
+    <string-array name="cursos">
         <item>Curso</item>
         <item>Matematica</item>
         <item>Pedagogia</item>
         <item>TADS</item>
     </string-array>
 
-    <string-array name="dias" >
-    <item>Dia</item>
-    <item>Segunda</item>
-    <item>Terça</item>
-    <item>Quarta</item>
+    <string-array name="dias">
+        <item>Dia</item>
+        <item>Segunda</item>
+        <item>Terca</item>
+        <item>Quarta</item>
         <item>Quinta</item>
         <item>Sexta</item>
     </string-array>

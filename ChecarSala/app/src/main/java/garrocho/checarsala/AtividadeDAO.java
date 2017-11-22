@@ -26,6 +26,11 @@ public class AtividadeDAO {
         return gw.getDatabase().insert(TABLE_ATIVIDADES, null, cv) > 0;
     }
 
+    public boolean remover(int sala, String horario, String curso, String dia) {
+        String[] cv = new String[]{""+sala, horario, curso, dia};
+        return gw.getDatabase().delete(TABLE_ATIVIDADES, "sala=? and horario=? and curso=? and dia=?", cv) > 0;
+    }
+
     public ArrayList<Atividade> listar(){
         Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM Atividade ORDER BY sala ASC", null);
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();

@@ -1,5 +1,7 @@
 package garrocho.checarsala;
 
+import android.util.Log;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
@@ -48,7 +50,7 @@ public class Email extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public synchronized boolean sendMail(String subject, String body, String sender, String from, String recipients) throws Exception {
+    public synchronized int sendMail(String subject, String body, String sender, String from, String recipients) throws Exception {
         try {
             MimeMessage message = new MimeMessage(session);
             DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/html"));
@@ -62,9 +64,12 @@ public class Email extends javax.mail.Authenticator {
             else
                 message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
             Transport.send(message);
-            return true;
+            return 0;
         } catch (Exception e) {
-            return false;
+            if (e.getMessage().contains("Couldn't connect to host"))
+                return 1;
+            else
+                return 2;
         }
     }
 
