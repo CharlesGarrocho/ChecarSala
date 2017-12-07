@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         semana.put("quinta", "quinta");
         semana.put("sexta", "sexta");
 
-        coordenadores.put("matematica", "Maycon Godoi9898ctgarrocho@gmail.com");
-        coordenadores.put("pedagogia", "Walas Oliveira9898ctgarrocho@gmail.com");
-        coordenadores.put("tads", "Paulo Zeferino9898ctgarrocho@gmail.com");
+        coordenadores.put("matematica", "Maycon Godoi9898ctgar@gmail.com");
+        coordenadores.put("pedagogia", "Walas Oliveira9898checarsala@gmail.com");
+        coordenadores.put("tads", "Paulo Zeferino9898checarsala@gmail.com");
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         for (int i = 1; i <= 15; i++) {
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Notificando os Coordenadores...", Toast.LENGTH_SHORT).show();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        final Email sender = new Email("ctgarrocho@gmail.com", "R4nb4xy123");
+        final Email sender = new Email("checarsala@gmail.com", "senha");
         for (int i=0; i<15; i++) {
             if (botoes[i] == 2) {
                 for (Atividade at : atividades) {
@@ -170,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                     resposta = sender.sendMail("[CAE] Sala Sem Atividade",
                                             "Prezado Coordenador " + inf[0]+", a sala " + sala + " está sem atividades neste momento. Não Responda a este email.",
-                                            "ctgarrocho@gmail.com", "[IFSP-CJO] CAE",
-                                            "ctgarrocho@gmail.com");
+                                            "checarsala@gmail.com", "[IFSP-CJO] CAE",
+                                            "checarsala@gmail.com");
                                 }catch (Exception error) {
                                     resposta = 3;
                                     error.printStackTrace();
